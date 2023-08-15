@@ -1,0 +1,9 @@
+
+/****** Object:  UserDefinedTableType [dbo].[AdditionalIncomeBatch]    Script Date: 8/15/2023 2:37:29 PM ******/
+CREATE TYPE [dbo].[AdditionalIncomeBatch] AS TABLE(
+	[AdditionalIncomeTypes] [int] NOT NULL,
+	[Amount] [int] NOT NULL
+)
+GO
+
+
