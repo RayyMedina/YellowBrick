@@ -1,0 +1,62 @@
+-- Author:			Raymond Medina
+-- Create date:		07/05/2023
+-- Description:		Select From the Client Id W/ Joins
+-- Code Reviewer:	Sean Humphreys
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER proc [dbo].[ClientEmployment_Select_ByClientId]
+				@Id int
+
+AS
+/*
+
+	Declare		@Id int = 7;
+
+	Execute		dbo.ClientEmployment_Select_ByClientId
+				@Id
+
+
+
+SELECT *
+FROM dbo.ClientEmployment
+Select *
+From dbo.clients
+*/
+BEGIN
+
+	SELECT
+			CM.Id,
+			CM.ClientId,
+			C.FirstName,
+			C.LastName,
+			C.Mi,
+			CM.IsSelfEmployed,
+			CM.ClientOccupation,
+			CM.Employer,
+			CM.JobTitle,
+			CM.YearsEmployed,
+			CM.IsSpouseSelfEmployed,
+			CM.SpouseOccupation,
+			CM.SpouseEmployer,
+			CM.SpouseYearsEmployed,
+			CM.CreatedBy,
+			U1.FirstName,
+			U1.LastName,
+			U1.Mi,
+			U1.AvatarUrl,
+			CM.ModifiedBy
+
+		FROM dbo.ClientEmployment AS CM
+		Inner Join dbo.Clients AS C On CM.ClientId = C.Id
+		Inner Join dbo.Users AS U1 On CM.CreatedBy = U1.Id
+
+
+		
+		Where CM.ClientId = @Id
+
+END
+
+
