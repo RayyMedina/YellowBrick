@@ -1,0 +1,53 @@
+-- Author:			Raymond Medina
+-- Create date:		07/24/2023
+-- Description:		Insert into the columns within dbo.ClientAdditionalIncome
+-- Code Reviewer:	
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER proc [dbo].[ClientAdditionalIncome_Updates]
+          ( @ClientId int
+           ,@AdditionalIncomeTypes int
+           ,@Amount int )
+
+
+AS
+/*
+
+			Declare  @ClientId int = 5
+					,@AdditionalIncomeTypes int = 2
+					,@Amount int = 550000
+
+		Execute dbo.ClientAdditionalIncome_Updates
+					@ClientId 
+					,@AdditionalIncomeTypes 
+					,@Amount 
+
+
+
+	Select *
+	From Dbo.ClientAdditionalIncome
+	Select *
+	From Dbo.AdditionalIncomeTypes
+	Select *
+	From Dbo.ClientIncome
+
+*/
+BEGIN 
+			--Change the amount based on the client Id and Type
+		UPDATE [dbo].[ClientAdditionalIncome]
+				SET [Amount] = @Amount
+
+						Where ClientId = @ClientId AND
+						AdditionalIncomeTypes = @AdditionalIncomeTypes
+
+						
+
+
+--						UPDATE table_name
+--SET column1 = value1, column2 = value2, ...
+--WHERE column3 = value3 AND column4 = value4;
+	
+End
