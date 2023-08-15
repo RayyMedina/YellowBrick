@@ -1,0 +1,100 @@
+-- Author:			Raymond Medina
+-- Create date:		07/03/2023
+-- Description:		Insert into the columns within dbo.ClientEmployment
+-- Code Reviewer:	Sean Humphreys
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER proc [dbo].[ClientEmployment_Insert]
+				(@ClientId int
+				,@IsSelfEmployed bit
+				,@ClientOccupation nvarchar(100)
+				,@Employer nvarchar(200) = Null
+				,@JobTitle nvarchar(100) = Null
+				,@YearsEmployed int = Null
+				,@IsSpouseSelfEmployed bit
+				,@SpouseOccupation nvarchar(100) = Null
+				,@SpouseEmployer nvarchar(200) = Null
+				,@SpouseYearsEmployed int = Null 
+				,@UserId int
+
+				,@Id int OUTPUT )
+
+AS
+/*
+		Declare @Id int = 0;
+
+		Declare  @ClientId int = 6
+				,@IsSelfEmployed bit = 2
+				,@ClientOccupation nvarchar(100) = 'Test'
+				,@Employer nvarchar(200) = 'Beta Tester'
+				,@JobTitle nvarchar(100) = 'SelfEmployed'
+				,@YearsEmployed int = 2
+				,@IsSpouseSelfEmployed bit = 2
+				,@SpouseOccupation nvarchar(100) = 'Beta Tester'
+				,@SpouseEmployer nvarchar(200) = 'Rested'
+				,@SpouseYearsEmployed int = 1
+				,@UserId int = 10
+
+
+		Execute dbo.ClientEmployment_Insert
+				 @ClientId
+				,@IsSelfEmployed 
+				,@ClientOccupation 
+				,@Employer 
+				,@JobTitle
+				,@YearsEmployed 
+				,@IsSpouseSelfEmployed 
+				,@SpouseOccupation
+				,@SpouseEmployer 
+				,@SpouseYearsEmployed 
+				,@UserId
+
+				,@Id OUTPUT
+
+
+
+SELECT *
+FROM dbo.ClientEmployment
+SELECT *
+FROM dbo.Clients
+*/
+BEGIN
+
+
+INSERT INTO [dbo].[ClientEmployment]
+           ([ClientId]
+		   ,[IsSelfEmployed]
+           ,[ClientOccupation]
+           ,[Employer]
+		   ,[JobTitle]
+           ,[YearsEmployed]
+           ,[IsSpouseSelfEmployed]
+           ,[SpouseOccupation]
+           ,[SpouseEmployer]
+           ,[SpouseYearsEmployed]
+           ,[CreatedBy]
+           ,[ModifiedBy])
+     VALUES
+           (@ClientId 
+		   ,@IsSelfEmployed 
+           ,@ClientOccupation 
+           ,@Employer 
+		   ,@JobTitle
+           ,@YearsEmployed 
+           ,@IsSpouseSelfEmployed 
+           ,@SpouseOccupation 
+           ,@SpouseEmployer 
+           ,@SpouseYearsEmployed 
+	       ,@UserId
+		   ,@UserId )
+
+			SET @Id = SCOPE_IDENTITY();
+
+
+
+END
+
+
