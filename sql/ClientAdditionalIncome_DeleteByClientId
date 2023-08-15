@@ -1,0 +1,38 @@
+-- Author:			Raymond Medina
+-- Create date:		07/24/2023
+-- Description:		Deletes an additional income by their respected ClientId.
+-- Code Reviewer:	
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER proc [dbo].[ClientAdditionalIncome_DeleteByClientId]
+				( @ClientId int )
+
+AS
+/*
+
+		Declare @ClientId int = 6;
+
+
+		Execute dbo.ClientAdditionalIncome_DeleteByClientId
+
+				@ClientId
+
+
+
+SELECT *
+FROM dbo.ClientAdditionalIncome
+
+*/
+BEGIN
+
+		DELETE FROM dbo.ClientAdditionalIncome
+		WHERE ClientId = @ClientId
+
+
+
+END
+
+
