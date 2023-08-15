@@ -1,0 +1,46 @@
+USE [YellowBrick]
+GO
+/****** Object:  StoredProcedure [dbo].[ClientIncome_DeleteById]    Script Date: 8/15/2023 1:47:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Author:			Raymond Medina
+-- Create date:		07/05/2023
+-- Description:		Deletes a individual by their respected Ids.
+-- Code Reviewer:	Sean Humphreys
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER proc [dbo].[ClientIncome_DeleteById]
+				( @Id int )
+
+AS
+/*
+
+		Declare @Id int = 18;
+
+
+		Execute dbo.ClientIncome_DeleteById
+
+				@Id 
+
+
+
+SELECT *
+FROM dbo.ClientIncome
+
+*/
+BEGIN
+
+		DELETE FROM dbo.ClientIncome
+		WHERE Id = @Id
+
+
+		
+END
+
+
