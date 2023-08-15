@@ -1,0 +1,106 @@
+USE [YellowBrick]
+GO
+/****** Object:  StoredProcedure [dbo].[Clientincome_Insert]    Script Date: 8/15/2023 1:47:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Author:			Raymond Medina
+-- Create date:		07/04/2023
+-- Description:		Insert into the columns within dbo.ClientIncome
+-- Code Reviewer:	Sean Humphreys
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER Proc [dbo].[Clientincome_Insert]
+			(@ClientId int
+			,@AnnualIncome decimal(16,2)
+			,@Bonus decimal(16,2) = Null
+			,@TaxRefund decimal(16,2) = Null
+			,@Commissions decimal(16,2) = Null
+			,@SpouseAnnualIncome decimal(16,2) = Null
+			,@SpouseBonus decimal(16,2) = Null
+			,@SpouseTaxRefund decimal(16,2) = Null
+			,@SpouseCommissions decimal(16,2) = Null
+			,@HasAdditionalIncome bit
+			,@UserId int
+
+			,@Id int OUTPUT)
+
+AS
+/*
+
+	Declare @Id int = 0;
+
+			Declare
+				@ClientId int = 6
+				,@AnnualIncome decimal(16,2) = 01.01
+				,@Bonus decimal(16,2) = 01.01
+				,@TaxRefund decimal(16,2) = 01.01
+				,@Commissions decimal(16,2)	= 01.01
+				,@SpouseAnnualIncome decimal(16,2) = 01.01
+				,@SpouseBonus decimal(16,2) = 01.01
+				,@SpouseTaxRefund decimal(16,2) = 01.01
+				,@SpouseCommissions decimal(16,2) = 01.01
+				,@HasAdditionalIncome bit = 1
+				,@UserId int = 4
+
+
+		Execute dbo.ClientIncome_Insert
+
+				@ClientId 
+				,@AnnualIncome 
+				,@Bonus 
+				,@TaxRefund 
+				,@Commissions
+				,@SpouseAnnualIncome
+				,@SpouseBonus 
+				,@SpouseTaxRefund 
+				,@SpouseCommissions 
+				,@HasAdditionalIncome 
+				,@UserId
+
+				,@Id OUTPUT
+
+
+Select *
+From ClientIncome
+
+*/
+BEGIN
+
+
+	INSERT INTO [dbo].[ClientIncome]
+			([ClientId]
+           ,[AnnualIncome]
+           ,[Bonus]
+           ,[TaxRefund]
+           ,[Commissions]
+           ,[SpouseAnnualIncome]
+           ,[SpouseBonus]
+           ,[SpouseTaxRefund]
+           ,[SpouseCommissions]
+           ,[HasAdditionalIncome]
+           ,[CreatedBy]
+           ,[ModifiedBy])
+
+	VALUES
+		( @ClientId
+			,@AnnualIncome
+			,@Bonus
+			,@TaxRefund
+			,@Commissions
+			,@SpouseAnnualIncome
+			,@SpouseBonus
+			,@SpouseTaxRefund
+			,@SpouseCommissions
+			,@HasAdditionalIncome
+			,@UserId
+			,@UserId)
+
+		SET @Id = SCOPE_IDENTITY();
+
+End
