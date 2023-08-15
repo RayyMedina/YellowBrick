@@ -1,0 +1,74 @@
+
+-- Author:			Raymond Medina
+-- Create date:		07/05/2023
+-- Description:		Select From the Client Id W/ Joins
+-- Code Reviewer:	Sean Humphreys
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER Proc [dbo].[Clientincome_Select_ByClientId]
+		(@Id int)
+		
+AS
+/*
+
+
+				Declare @Id int = 5;
+
+		Execute dbo.ClientIncome_Select_ByClientId
+						@Id
+
+
+SELECT *
+From ClientIncome
+SELECT *
+From Clients
+SELECT *
+From Users
+SELECT *
+FROM ClientAdditionalIncome
+*/
+BEGIN
+
+
+			SELECT
+				CI.Id,
+				CI.ClientId,
+				C.FirstName,
+				C.LastName,
+				C.Mi,
+				CI.AnnualIncome,
+				CI.Bonus,
+				CI.TaxRefund,
+				CI.Commissions,
+				CI.SpouseAnnualIncome,
+				CI.SpouseBonus,
+				CI.SpouseTaxRefund,
+				CI.SpouseCommissions,
+				CI.HasAdditionalIncome,
+				AddIncome = (SELECT 
+							AT.Id AS 'AdditionalIncomeType.Id',
+							AT.Name AS 'AdditionalIncomeType.Name',
+							A.Amount AS 'Amount'
+								FROM [DBO].[ClientAdditionalIncome] AS A 
+								JOIN [DBO].[AdditionalIncomeTypes] AS AT ON	AT.Id = A.AdditionalIncomeTypes
+						   	
+					WHERE A.ClientId = @Id
+					FOR JSON PATH),
+
+				CI.CreatedBy,
+				U1.FirstName,
+				U1.LastName,
+				U1.Mi,
+				U1.AvatarUrl,
+				CI.ModifiedBy
+
+
+			From dbo.ClientIncome AS CI
+		INNER JOIN dbo.Clients AS C On CI.ClientId = C.Id
+		INNER JOIN dbo.Users AS U1 On CI.CreatedBy = U1.Id
+			Where CI.ClientId = @Id
+
+End		
