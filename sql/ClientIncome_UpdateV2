@@ -1,0 +1,98 @@
+
+-- Author:			Raymond Medina
+-- Create date:		07/24/2023
+-- Description:		Update into the columns within dbo.ClientIncome / AdditionalIncome
+-- Code Reviewer:	
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER Proc [dbo].[ClientIncome_UpdateV2]
+			(
+			 @ClientId int
+			,@AnnualIncome decimal(16,2)
+			,@Bonus decimal(16,2) = Null
+			,@TaxRefund decimal(16,2) = Null
+			,@Commissions decimal(16,2) = Null
+			,@SpouseAnnualIncome decimal(16,2) = Null
+			,@SpouseBonus decimal(16,2) = Null
+			,@SpouseTaxRefund decimal(16,2) = Null
+			,@SpouseCommissions decimal(16,2) = Null
+			,@HasAdditionalIncome bit
+			,@UserId int
+			,@Id int 
+
+			,@AdditionalIncomeTypes INT = NULL
+			,@Amount INT = NULL
+			)
+AS
+/*
+
+	Declare @Id int = 33;
+
+			Declare
+				@ClientId int = 6
+				,@AnnualIncome decimal(16,2) = 120000
+				,@Bonus decimal(16,2) = 02.02
+				,@TaxRefund decimal(16,2) = 02.02
+				,@Commissions decimal(16,2)	= 02.02
+				,@SpouseAnnualIncome decimal(16,2) = 02.02
+				,@SpouseBonus decimal(16,2) = 02.02
+				,@SpouseTaxRefund decimal(16,2) = 02.02
+				,@SpouseCommissions decimal(16,2) = 02.02
+				,@HasAdditionalIncome BIT = 1
+				,@UserId int = 4
+				,@AdditionalIncomeTypes INT = 1
+				,@Amount INT = 203
+
+		Execute dbo.ClientIncome_UpdateV2
+
+				@ClientId 
+				,@AnnualIncome 
+				,@Bonus 
+				,@TaxRefund 
+				,@Commissions
+				,@SpouseAnnualIncome
+				,@SpouseBonus 
+				,@SpouseTaxRefund 
+				,@SpouseCommissions 
+				,@HasAdditionalIncome 
+				,@UserId
+				,@Id 
+
+				
+				,@AdditionalIncomeTypes 
+				,@Amount 
+
+Select *
+From ClientIncome
+
+Select *
+From ClientAdditionalIncome
+
+*/
+BEGIN 
+
+	Update [dbo].[ClientIncome]
+    SET   
+           [AnnualIncome]=@AnnualIncome
+           ,[Bonus]=@Bonus
+           ,[TaxRefund]=@TaxRefund
+           ,[Commissions]=@Commissions
+           ,[SpouseAnnualIncome]=@SpouseAnnualIncome
+           ,[SpouseBonus]=@SpouseBonus
+           ,[SpouseTaxRefund]=@SpouseTaxRefund
+           ,[SpouseCommissions]=@SpouseCommissions
+		   ,[HasAdditionalIncome]=@HasAdditionalIncome
+           ,[ModifiedBy]=@UserId
+
+			WHERE Id = @Id
+
+			IF @HasAdditionalIncome = 1
+	UPDATE [dbo].[ClientAdditionalIncome]
+	SET	   [Amount] = @Amount
+
+		WHERE ClientId = @ClientId AND
+		AdditionalIncomeTypes = @AdditionalIncomeTypes
+END 
