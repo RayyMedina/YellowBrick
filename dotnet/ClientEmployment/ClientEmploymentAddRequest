@@ -28,7 +28,7 @@ namespace Models.Requests
         public int? YearsEmployed { get; set; }
 
         [Required]
-        public bool IsSpouseSelfEmployed { get; set; }
+        public bool IsSpouseSelfEmployed { get; set; } 
 
 
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 0)]
