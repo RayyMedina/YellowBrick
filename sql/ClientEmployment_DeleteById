@@ -1,0 +1,38 @@
+-- Author:			Raymond Medina
+-- Create date:		07/05/2023
+-- Description:		Deletes a individual by their respected Ids.
+-- Code Reviewer:	Sean Humphreys
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER proc [dbo].[ClientEmployment_DeleteById]
+				( @Id int )
+
+AS
+/*
+
+		Declare @Id int = 111;
+
+
+		Execute dbo.ClientEmployment_DeleteById
+
+				@Id 
+
+
+
+SELECT *
+FROM dbo.ClientEmployment
+
+*/
+BEGIN
+
+		DELETE FROM dbo.ClientEmployment
+		WHERE Id = @Id
+
+
+
+END
+
+
