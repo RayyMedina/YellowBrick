@@ -1,0 +1,48 @@
+-- Author:			Raymond Medina
+-- Create date:		07/21/2023
+-- Description:		Insert into the columns within dbo.ClientAdditionalIncome
+-- Code Reviewer:	
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER proc [dbo].[ClientAdditionalIncome_Insert]
+          ( @ClientId int
+           ,@AdditionalIncomeTypes int
+           ,@Amount int )
+
+
+AS
+/*
+
+			Declare  @ClientId int = 5
+					,@AdditionalIncomeTypes int = 1
+					,@Amount int = 20000
+
+		Execute dbo.ClientAdditionalIncome_Insert
+					@ClientId 
+					,@AdditionalIncomeTypes 
+					,@Amount 
+
+
+			Select *
+			From Dbo.AdditionalIncome
+			Select *
+			From Dbo.Clients
+			Select *
+			From Dbo.ClientIncome
+
+*/
+BEGIN 
+
+	INSERT INTO dbo.ClientAdditionalIncome
+				([ClientId]
+				,[AdditionalIncomeTypes]
+				,[Amount])
+		VALUES
+				(@ClientId
+				,@AdditionalIncomeTypes
+				,@Amount)
+
+End
