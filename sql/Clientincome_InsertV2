@@ -1,0 +1,128 @@
+
+-- Author:			Raymond Medina
+-- Create date:		07/21/2023
+-- Description:		Insert into the columns within dbo.ClientIncome
+-- Code Reviewer:	 
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+ALTER Proc [dbo].[Clientincome_InsertV2]
+				(
+			@AddIncome dbo.AdditionalIncomeBatch READONLY,
+			@ClientId INT,
+			@AnnualIncome DECIMAL(16, 2),
+			@Bonus DECIMAL(16, 2) = NULL,
+			@TaxRefund DECIMAL(16, 2) = NULL,
+			@Commissions DECIMAL(16, 2) = NULL,
+			@SpouseAnnualIncome DECIMAL(16, 2) = NULL,
+			@SpouseBonus DECIMAL(16, 2) = NULL,
+			@SpouseTaxRefund DECIMAL(16, 2) = NULL,
+			@SpouseCommissions DECIMAL(16, 2) = NULL,
+			@UserId INT,
+			@Id INT OUTPUT,
+			@HasAdditionalIncome BIT
+			)
+
+AS
+/*------- Test Code -----
+
+		DECLARE @AddIncome dbo.AdditionalIncomeBatch;
+
+	DECLARE @Id INT = 0;
+
+	DECLARE @ClientId INT = 5
+				,@AnnualIncome DECIMAL(16, 2) = 01.01
+				,@Bonus DECIMAL(16, 2) = 01.01
+				,@TaxRefund DECIMAL(16, 2) = 01.01
+				,@Commissions DECIMAL(16, 2) = 01.01
+				,@SpouseAnnualIncome DECIMAL(16, 2) = 01.01
+				,@SpouseBonus DECIMAL(16, 2) = 01.01
+				,@SpouseTaxRefund DECIMAL(16, 2) = 01.01
+				,@SpouseCommissions DECIMAL(16, 2) = 01.01
+				,@UserId INT = 4
+				,@HasAdditionalIncome BIT = 1
+
+		INSERT INTO @AddIncome (
+					AdditionalIncomeTypes 
+					,Amount 
+		)
+		VALUES (1,2000000)
+	
+
+
+	EXECUTE dbo.Clientincome_InsertV2 
+				@AddIncome
+				,@ClientId
+				,@AnnualIncome
+				,@Bonus
+				,@TaxRefund
+				,@Commissions
+				,@SpouseAnnualIncome
+				,@SpouseBonus
+				,@SpouseTaxRefund
+				,@SpouseCommissions
+				,@UserId
+				,@Id OUTPUT
+				,@HasAdditionalIncome
+
+
+
+	SELECT *
+	FROM dbo.ClientIncome
+				
+	SELECT *
+	FROM dbo.ClientAdditionalIncome
+
+-- ----- Test Code -----*/
+BEGIN TRY
+			BEGIN TRANSACTION
+
+    EXECUTE dbo.ClientIncome_Insert
+			@ClientId
+			,@AnnualIncome
+			,@Bonus
+			,@TaxRefund
+			,@Commissions
+			,@SpouseAnnualIncome
+			,@SpouseBonus
+			,@SpouseTaxRefund
+			,@SpouseCommissions
+			,@HasAdditionalIncome
+			,@UserId
+			,@Id OUTPUT
+
+				 
+		IF @HasAdditionalIncome = 1
+			BEGIN
+			INSERT INTO ClientAdditionalIncome (
+			 ClientId
+			,AdditionalIncomeTypes
+            ,Amount
+
+    )
+			SELECT 
+					 @clientId
+					,AI.AdditionalIncomeTypes
+					,AI.Amount
+			        
+			FROM @AddIncome as AI
+
+			END
+
+			COMMIT TRANSACTION;
+
+
+END TRY
+ 
+BEGIN CATCH
+			
+			IF @@TRANCOUNT > 0 ROLLBACK
+				DECLARE @MSG NVARCHAR(2048) = ERROR_MESSAGE()
+				RAISERROR (@MSG,16,1)
+			ROLLBACK;
+ 
+END CATCH
+
+
