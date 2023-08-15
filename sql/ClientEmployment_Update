@@ -1,0 +1,82 @@
+-- Author:			Raymond Medina
+-- Create date:		07/05/2023
+-- Description:		Update into the columns within dbo.ClientEmployment
+-- Code Reviewer:	Sean Humphreys
+
+-- MODIFIED BY:Harrison Cook
+-- MODIFIED DATE: 08/03/2023
+-- Code Reviewer: Nick Bassirpour
+-- Note:Edited to update by clientId not ID and added =null to nullables
+
+ALTER proc [dbo].[ClientEmployment_Update]
+				(@ClientId int
+				,@IsSelfEmployed bit
+				,@ClientOccupation nvarchar(100)
+				,@Employer nvarchar(200)
+				,@JobTitle nvarchar(100)
+				,@YearsEmployed int
+				,@IsSpouseSelfEmployed bit
+				,@SpouseOccupation nvarchar(100)=NULL
+				,@SpouseEmployer nvarchar(200)=NULL
+				,@SpouseYearsEmployed int=NULL
+				,@UserId int
+				,@Id int
+				)
+
+AS
+/*
+	
+
+		Declare  @ClientId int = 330
+				,@ClientOccupation nvarchar(100) = 'Zulu'
+				,@IsSelfEmployed bit = 1
+				,@Employer nvarchar(200) = 'Charlie'
+				,@JobTitle nvarchar(100) = 'SelfEmployed'
+				,@YearsEmployed int = 1
+				,@IsSpouseSelfEmployed bit = 1
+				,@SpouseOccupation nvarchar(100) = 'Gamma'
+				,@SpouseEmployer nvarchar(200) = 'Delta'
+				,@SpouseYearsEmployed int = 0
+				,@UserId int = 6
+
+		Execute dbo.ClientEmployment_Update
+				 @ClientId
+				,@IsSelfEmployed 
+				,@ClientOccupation 
+				,@Employer 
+				,@JobTitle
+				,@YearsEmployed 
+				,@IsSpouseSelfEmployed 
+				,@SpouseOccupation
+				,@SpouseEmployer 
+				,@SpouseYearsEmployed 
+				,@UserId
+				,@Id
+
+	
+
+
+
+SELECT *
+FROM dbo.ClientEmployment
+*/
+BEGIN
+
+	UPDATE [dbo].[ClientEmployment]
+       SET	[ClientId] = @ClientId
+		   ,[IsSelfEmployed] = @IsSelfEmployed
+           ,[ClientOccupation] = @ClientOccupation
+           ,[Employer] = @Employer
+		   ,[JobTitle] = @JobTitle
+           ,[YearsEmployed] = @YearsEmployed
+           ,[IsSpouseSelfEmployed] = @IsSpouseSelfEmployed
+           ,[SpouseOccupation] = @SpouseOccupation
+           ,[SpouseEmployer] = SpouseEmployer
+           ,[SpouseYearsEmployed] = SpouseYearsEmployed
+           ,[ModifiedBy] = @UserId
+
+		Where ClientId=@ClientId
+
+END
+
+
