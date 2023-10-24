@@ -1,0 +1,41 @@
+-- =========================================================
+-- Author:			Raymond Medina
+-- Create date:		10/16/2023
+-- Description:		SelectById proc for dbo.SurveyInstances
+-- Code Reviewer:	
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+-- =========================================================
+ALTER Proc [dbo].[SurveyInstances_SelectById]
+				@Id int
+As
+/*					--------Test Code--------
+
+		Declare @Id int = 1
+
+
+		Execute dbo.[SurveyInstances_SelectById]
+
+				@Id 
+
+
+
+SELECT *
+FROM dbo.SurveyInstances
+
+*/
+BEGIN
+
+	SELECT	[Id]
+			,[UserId]
+			,[SurveyId]
+			,[DateCreated]
+			,[DateModified]
+  FROM [dbo].[SurveyInstances]
+  Where Id = @Id
+  Order By Id
+
+END
