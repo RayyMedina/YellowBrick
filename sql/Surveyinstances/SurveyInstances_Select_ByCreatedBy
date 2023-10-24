@@ -1,0 +1,58 @@
+-- =============================================================
+-- Author:			Raymond Medina
+-- Create date:		10/19/2023
+-- Description:		 Select all SurveyInstances by the user ID
+-- Code Reviewer:	
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+-- ===============================================================
+ALTER PROC [dbo].[SurveyInstances_Select_ByCreatedBy]  
+							@UserId int,
+							@PageIndex int,
+							@PageSize int
+							
+
+AS
+
+/*					--------Test Code--------
+		DECLARE @UserId int = 1,
+				@PageIndex int = 0,
+				@PageSize int = 3;
+		
+	EXECUTE [dbo].[SurveyInstances_Select_ByCreatedBy]
+				@UserId,
+				@PageIndex,
+				@PageSize;
+
+
+
+*/
+
+BEGIN
+
+    DECLARE @offset INT = @PageIndex * @PageSize
+
+    SELECT
+        i.[Id] AS SurveyInstanceId,
+        i.[SurveyId],
+        i.[UserId],
+        u.[FirstName],
+        u.[LastName],
+        u.[Mi],
+        u.[AvatarUrl],
+        i.[DateCreated],
+        i.[DateModified],
+        TotalCount = COUNT(1) OVER()
+
+    FROM [dbo].[SurveyInstances] AS i
+    INNER JOIN dbo.Users AS u ON i.[UserId] = u.[Id]
+
+    WHERE i.[UserId] = @UserId
+
+    ORDER BY i.[Id]
+    OFFSET @offset ROWS
+    FETCH NEXT @PageSize ROWS ONLY
+END
