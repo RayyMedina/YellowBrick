@@ -1,0 +1,47 @@
+-- Author:			Raymond Medina
+-- Create date:		10/14/2023
+-- Description:		Insert into the columns within dbo.SurveyInstances
+-- Code Reviewer:	
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note: 
+ALTER proc [dbo].[SurveyInstances_Insert]
+          ( 
+			@SurveyId int
+           ,@UserId int = null
+           ,@Id int OUTPUT
+		   )
+
+
+AS
+/*
+			Declare	 @Id int = 0
+
+			Declare  @SurveyId int = 1
+					,@UserId int = 1
+			
+
+		Execute dbo.SurveyInstances_Insert
+					@SurveyId 
+					,@UserId 
+					,@Id OUTPUT
+
+
+Select *
+From Dbo.SurveyInstances
+*/
+BEGIN 
+
+		INSERT INTO dbo.SurveyInstances
+					([SurveyId]
+					,[UserId])
+
+
+			VALUES
+					(@SurveyId 
+					,@UserId )
+		SET @Id = SCOPE_IDENTITY()
+
+End
