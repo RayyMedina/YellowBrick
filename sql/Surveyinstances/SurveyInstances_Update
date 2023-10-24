@@ -1,0 +1,50 @@
+-- =====================================================================
+-- Author:			Raymond Medina
+-- Create date:		10/15/2023
+-- Description:		Update into the columns within dbo.SurveyInstances
+-- Code Reviewer:
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+-- =====================================================================
+
+ALTER Proc [dbo].[SurveyInstances_Update]
+          ( 
+			@SurveyId int
+           ,@UserId int = null
+           ,@Id int OUTPUT
+		   )
+AS
+/*					--------Test Code--------
+
+	Declare @Id int = 1;
+
+			Declare
+				@SurveyId int = 2
+				,@UserId int = 1
+
+
+		Execute dbo.SurveyInstances_Update
+
+				@SurveyId 
+				,@UserId
+
+				,@Id OUTPUT
+
+
+Select *
+From SurveyInstances
+
+*/
+BEGIN
+
+
+	Update [dbo].[SurveyInstances]
+    SET    [SurveyId]=@SurveyId
+           ,[UserId]=@UserId
+
+	Where Id=@Id
+
+End
