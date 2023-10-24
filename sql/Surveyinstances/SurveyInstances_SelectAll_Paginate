@@ -1,0 +1,53 @@
+-- =========================================================
+-- Author:			Raymond Medina
+-- Create date:		10/18/2023
+-- Description:		SelectAll_P into the columns within dbo.SurveyInstances
+-- Code Reviewer:	
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:
+-- =========================================================
+ALTER PROC [dbo].[SurveyInstances_SelectAll_Paginate]    
+						@PageIndex int,
+						@PageSize int
+
+AS
+
+/*					--------Test Code--------
+		DECLARE @PageIndex int = 0,
+				@PageSize int = 3;
+		
+	EXECUTE [dbo].[SurveyInstances_SelectAll_Paginate]
+				@PageIndex 
+				,@PageSize;
+
+
+
+*/
+
+BEGIN
+
+    DECLARE @offset INT = @PageIndex * @PageSize
+
+		SELECT p.[Id]
+			,p.[SurveyId]
+			,u.Id as CreatedBy
+			,U.[FirstName]
+			,U.[LastName]
+			,U.[Mi]
+			,U.[AvatarUrl]
+			,p.[DateCreated]
+			,p.[DateModified]
+
+		  ,TotalCount = COUNT(1) OVER()
+
+	FROM [dbo].[SurveyInstances] AS p
+		INNER JOIN dbo.Users as u on p.UserId = u.Id
+
+    ORDER by p.Id ASC
+	OFFSET @offset ROWS
+	FETCH NEXT @PageSize ROWS Only
+
+END
