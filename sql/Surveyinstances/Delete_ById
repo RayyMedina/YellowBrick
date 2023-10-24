@@ -1,0 +1,30 @@
+-- =======================================================
+-- Author:			Raymond Medina
+-- Create date:		10/15/2023
+-- Description:		Delete proc for dbo.SurveyInstances
+-- =======================================================
+ALTER Proc [dbo].[SurveyInstances_Delete_ById]
+				@Id int
+As
+/*               ---Test Code---
+
+		Declare @Id int = 1;
+
+
+		Execute dbo.SurveyInstances_Delete_ById
+
+				@Id 
+
+
+
+SELECT *
+FROM dbo.SurveyInstances
+
+*/
+Begin
+
+Delete 
+From dbo.SurveyInstances 
+Where Id=@Id
+
+End
